@@ -15,8 +15,28 @@
     --timing-fast: 0.2s;
     --timing-base: 0.3s;
     --timing-slow: 0.5s;
-    --timing-item: 0.8s;      /* Czas animacji pojedynczego itema */
-    --timing-delay: 0.1s;     /* Opóźnienie między itemami */
+    --timing-item: 0.8s;
+    --timing-delay: 0.1s;
+    
+    /* Layout - Percentage-based dimensions */
+    --nav-height: 80px;
+    --content-height: calc(100vh - var(--nav-height));
+    
+    /* Split Container (Home & Detail) */
+    --split-picture-width: 70%;
+    --split-text-width: 30%;
+    --split-gap: 2%;
+    --split-padding: 2.5%;
+    
+    /* Detail Navigation Buttons */
+    --detail-nav-height: 80px;
+    --detail-nav-bottom: 3%;
+    --nav-btn-size: 56px;
+    --nav-btn-gap: 1.5rem;
+    
+    /* Submenu Grid */
+    --submenu-max-width: 90%;
+    --submenu-gap: 2rem;
 }
 
 * {
@@ -47,16 +67,20 @@ body {
     left: 0;
     right: 0;
     z-index: 1000;
+    height: var(--nav-height);
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+    display: flex;
+    align-items: center;
 }
 
 .nav-container {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -105,21 +129,29 @@ body {
 }
 
 /* ===================================
-   MAIN CONTENT
+   MAIN CONTENT - BASE
    =================================== */
 .content {
-    height: 100vh;
-    padding-top: 80px;
+    height: var(--content-height);
+    margin-top: var(--nav-height);
     position: relative;
     overflow: hidden;
 }
 
 .content-view {
     position: absolute;
-    top: 80px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* FLEX - wszystkie widoki wypośrodkowane */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--timing-slow), visibility var(--timing-slow);
@@ -131,22 +163,27 @@ body {
 }
 
 /* ===================================
-   HOME & DETAIL VIEW (Split Layout)
+   SPLIT CONTAINER - Home & Detail
+   Flex layout z wypośrodkowaniem
    =================================== */
-#view-home,
-#view-detail {
-    display: grid;
-    grid-template-columns: 60% 40%;
-    gap: 2rem;
-    padding: 2rem;
-    position: relative;
+.split-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--split-gap);
+    width: 80%;
+    height: 100%;
+    padding: var(--split-padding);
 }
 
 .content-picture {
+    flex: 0 0 var(--split-picture-width);
+    height: 85%;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-radius: 24px;
     overflow: hidden;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,6 +196,9 @@ body {
 }
 
 .content-text {
+    flex: 0 0 var(--split-text-width);
+    height: 85%;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -179,49 +219,6 @@ body {
     line-height: 1.8;
     margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.95);
-}
-
-/* ===================================
-   BACK BUTTON (Floating)
-   =================================== */
-.back-button {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    z-index: 10;
-    width: 56px;
-    height: 56px;
-    border: none;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--timing-base);
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
-}
-
-.back-button:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.25);
-    background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
-}
-
-.back-button:hover svg {
-    stroke: var(--white);
-}
-
-.back-button:active {
-    transform: translateY(0) scale(0.98);
-}
-
-.back-button svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--dark-purple);
-    transition: var(--timing-fast);
 }
 
 /* ===================================
@@ -255,28 +252,104 @@ body {
 }
 
 /* ===================================
-   SUBMENU GRID - FLEX LAYOUT
-   Elastyczny layout dla 1-12+ itemów
+   DETAIL NAVIGATION BUTTONS
+   Zespół buttonów na dole środku
    =================================== */
-#view-submenu {
+.detail-nav {
+    position: absolute;
+    bottom: var(--detail-nav-bottom);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: var(--nav-btn-gap);
+}
+
+.nav-btn {
+    width: var(--nav-btn-size);
+    height: var(--nav-btn-size);
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 50%;
+    cursor: pointer;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: all var(--timing-base);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+}
+
+.nav-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.25);
+    background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
+}
+
+.nav-btn:hover svg {
+    stroke: var(--white);
+}
+
+.nav-btn:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.nav-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--dark-purple);
+    transition: var(--timing-fast);
+}
+
+/* Back button - wyróżnienie */
+.nav-btn--back {
+    width: calc(var(--nav-btn-size) * 1.15);
+    height: calc(var(--nav-btn-size) * 1.15);
+}
+
+.nav-btn--back:hover {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Disabled state */
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.nav-btn:disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* ===================================
+   SUBMENU GRID - FLEX LAYOUT
+   =================================== */
+#view-submenu-akwarystyka,
+#view-submenu-aplikacje,
+#view-submenu-rower,
+#view-submenu-inne {
     padding: 2rem;
 }
 
 .submenu-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-    max-width: 1200px;
+    gap: var(--submenu-gap);
+    max-width: var(--submenu-max-width);
     width: 100%;
     justify-content: center;
     align-items: stretch;
 }
 
 .submenu-item {
-    /* Bazowy rozmiar - dostosowuje się do liczby itemów */
     flex: 1 1 250px;
     min-width: 250px;
     max-width: 400px;
@@ -285,12 +358,14 @@ body {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 24px;
     cursor: pointer;
+    
     display: flex;
     align-items: center;
     justify-content: center;
+    
     transition: transform var(--timing-base);
     
-    /* Initial hidden state */
+    /* Initial hidden state for animation */
     opacity: 0;
     transform: scale(0.8);
 }
@@ -312,13 +387,11 @@ body {
 
 /* ===================================
    STAGGER ANIMATION
-   Automatyczne generowanie delays dla dowolnej liczby itemów
    =================================== */
 .submenu-grid.animate .submenu-item {
     animation: staggerScale var(--timing-item) ease-out forwards;
 }
 
-/* Delays dla pierwszych 12 itemów (rozszerz jeśli potrzebujesz więcej) */
 .submenu-grid.animate .submenu-item:nth-child(1) { animation-delay: calc(var(--timing-delay) * 1); }
 .submenu-grid.animate .submenu-item:nth-child(2) { animation-delay: calc(var(--timing-delay) * 2); }
 .submenu-grid.animate .submenu-item:nth-child(3) { animation-delay: calc(var(--timing-delay) * 3); }
@@ -332,7 +405,6 @@ body {
 .submenu-grid.animate .submenu-item:nth-child(11) { animation-delay: calc(var(--timing-delay) * 11); }
 .submenu-grid.animate .submenu-item:nth-child(12) { animation-delay: calc(var(--timing-delay) * 12); }
 
-/* Keyframes dla stagger */
 @keyframes staggerScale {
     0% {
         opacity: 0;
@@ -347,49 +419,29 @@ body {
     }
 }
 
-/* ===================================
-   LAYOUT BREAKPOINTS dla submenu
-   Automatyczne dostosowanie liczby kolumn
-   =================================== */
-
-/* 3 kolumny dla dużych ekranów */
-@media (min-width: 1200px) {
-    .submenu-item {
-        flex: 1 1 calc(33.333% - 2rem);
-        max-width: calc(33.333% - 2rem);
-    }
+/* Detail View - Slide Animation */
+.content-view#view-detail .split-container {
+    animation: slideIn var(--timing-slow) ease-out;
 }
 
-/* 2 kolumny dla średnich ekranów */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .submenu-item {
-        flex: 1 1 calc(50% - 1rem);
-        max-width: calc(50% - 1rem);
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
     }
-}
-
-/* 1 kolumna dla małych ekranów */
-@media (max-width: 767px) {
-    .submenu-item {
-        flex: 1 1 100%;
-        max-width: 100%;
-        min-width: 200px;
+    100% {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
 /* ===================================
-   KONTAKT VIEW
+   KONTAKT VIEW - FLEX CENTER
    =================================== */
-#view-kontakt {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-}
-
 .kontakt-container {
     text-align: center;
     max-width: 800px;
+    width: 90%;
 }
 
 .kontakt-container h2 {
@@ -413,6 +465,7 @@ body {
     text-decoration: none;
     color: var(--dark-purple);
     transition: var(--timing-base);
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -436,57 +489,37 @@ body {
 }
 
 /* ===================================
-   RESPONSIVE
+   LAYOUT BREAKPOINTS
    =================================== */
-@media (max-width: 1024px) {
-    #view-home,
-    #view-detail {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
-    
-    .back-button {
-        top: 1rem;
-        left: 1rem;
-        width: 48px;
-        height: 48px;
-    }
-    
-    .social-icons {
-        grid-template-columns: 1fr;
-        max-width: 300px;
-        margin: 0 auto;
+@media (min-width: 1200px) {
+    .submenu-item {
+        flex: 1 1 calc(10% - var(--submenu-gap));
+        max-width: calc(10% - var(--submenu-gap));
+        margin: 5%;
     }
 }
 
-@media (max-width: 768px) {
-    .nav-menu {
-        gap: 1rem;
-        font-size: 0.85rem;
+@media (min-width: 768px) and (max-width: 1199px) {
+    .submenu-item {
+        flex: 1 1 calc(40% - var(--submenu-gap));
+        max-width: calc(40% - var(--submenu-gap));
     }
-    
-    .logo {
-        font-size: 1.2rem;
-    }
-    
-    .content-text h1,
-    .content-text h2 {
-        font-size: 2rem;
-    }
-    
-    .submenu-grid {
-        gap: 1rem;
-        padding: 1rem;
+}
+
+@media (max-width: 767px) {
+    .submenu-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+        min-width: 200px;
     }
 }
 
 /* ===================================
-   KEYBOARD NAVIGATION PREP
-   Focus styles dla accessibility
+   KEYBOARD NAVIGATION & ACCESSIBILITY
    =================================== */
 .nav-link:focus,
 .submenu-item:focus,
-.back-button:focus,
+.nav-btn:focus,
 .social-icon:focus {
     outline: 3px solid rgba(255, 255, 255, 0.8);
     outline-offset: 4px;
