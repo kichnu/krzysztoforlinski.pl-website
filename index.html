@@ -10,9 +10,52 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style-v3.css" />
+
+    <!-- Slick Slider CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style-blur.css" />
   </head>
   <body>
+    <!-- SVG Filters for Motion Blur -->
+    <svg
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="0"
+      height="0"
+      viewBox="0 0 1366 768"
+      xml:space="preserve"
+    >
+      <defs>
+        <filter id="blur0">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
+        </filter>
+        <filter id="blur1">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5 0" />
+        </filter>
+        <filter id="blur2">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="12 0" />
+        </filter>
+        <filter id="blur3">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="20 0" />
+        </filter>
+        <filter id="blur4">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="35 1" />
+        </filter>
+        <filter id="blur5">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="50 1" />
+        </filter>
+      </defs>
+    </svg>
+
     <!-- Navigation -->
     <nav class="main-nav">
       <div class="nav-container">
@@ -20,7 +63,9 @@
         <ul class="nav-menu">
           <li><a href="#" class="nav-link" data-menu="home">Home</a></li>
           <li>
-            <a href="#" class="nav-link" data-menu="akwarystyka">Akwarystyka</a>
+            <a href="#" class="nav-link active" data-menu="akwarystyka"
+              >Akwarystyka</a
+            >
           </li>
           <li>
             <a href="#" class="nav-link" data-menu="aplikacje">Aplikacje</a>
@@ -38,7 +83,7 @@
       </div>
     </nav>
 
-    <!-- Main Content Container -->
+    <!-- Main Content -->
     <main class="content">
       <!-- Home View -->
       <div class="content-view" id="view-home">
@@ -50,203 +95,52 @@
             <h1>Node.js Developer</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <p>
               Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-              cupidatat non proident.
+              cillum dolore eu fugiat nulla pariatur.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Submenu Akwarystyka (3 kafelki) -->
-      <div class="content-view" id="view-submenu-akwarystyka">
-        <div class="submenu-grid">
-          <div class="submenu-item" data-section="akwarystyka" data-item="1">
-            <div class="submenu-content">
-              <span>Akwarium 300L</span>
+      <!-- Akwarystyka View - Slick Slider -->
+      <div class="content-view active" id="view-akwarystyka">
+        <div class="slider">
+          <!-- Slide 1 -->
+          <div>
+            <div class="slide-content">
+              <img
+                src="https://images.unsplash.com/photo-1446770145316-10a05382c470?dpr=1&auto=format&fit=crop&w=900&h=450&q=80&cs=tinysrgb&crop="
+                alt=""
+              />
+    
             </div>
           </div>
-          <div class="submenu-item" data-section="akwarystyka" data-item="2">
-            <div class="submenu-content">
-              <span>Akwarium morskie</span>
+
+          <!-- Slide 2 -->
+          <div>
+            <div class="slide-content">
+              <img
+                src="https://images.unsplash.com/photo-1455717974081-0436a066bb96?dpr=1&auto=format&fit=crop&w=900&h=450&q=80&cs=tinysrgb&crop="
+                alt=""
+              />
+         
             </div>
           </div>
-          <div class="submenu-item" data-section="akwarystyka" data-item="3">
-            <div class="submenu-content">
-              <span>Biotop amazoński</span>
+
+          <!-- Slide 3 -->
+          <div>
+            <div class="slide-content">
+              <img
+                src="https://images.unsplash.com/photo-1477420086945-b99c643e8a3d?dpr=1&auto=format&fit=crop&w=900&h=450&q=80&cs=tinysrgb&crop="
+                alt=""
+              />
+        
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Submenu Aplikacje (6 kafelków) -->
-      <div class="content-view" id="view-submenu-aplikacje">
-        <div class="submenu-grid">
-          <div class="submenu-item" data-section="aplikacje" data-item="1">
-            <div class="submenu-content">
-              <span>Task Manager</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="aplikacje" data-item="2">
-            <div class="submenu-content">
-              <span>Weather App</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="aplikacje" data-item="3">
-            <div class="submenu-content">
-              <span>E-commerce</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="aplikacje" data-item="4">
-            <div class="submenu-content">
-              <span>Chat App</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="aplikacje" data-item="5">
-            <div class="submenu-content">
-              <span>Portfolio CMS</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="aplikacje" data-item="6">
-            <div class="submenu-content">
-              <span>Analytics Dashboard</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Submenu Rower poziomy (2 kafelki) -->
-      <div class="content-view" id="view-submenu-rower">
-        <div class="submenu-grid">
-          <div class="submenu-item" data-section="rower" data-item="1">
-            <div class="submenu-content">
-              <span>Projekt konstrukcji</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="rower" data-item="2">
-            <div class="submenu-content">
-              <span>Proces budowy</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Submenu Inne (4 kafelki) -->
-      <div class="content-view" id="view-submenu-inne">
-        <div class="submenu-grid">
-          <div class="submenu-item" data-section="inne" data-item="1">
-            <div class="submenu-content">
-              <span>Fotografia</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="inne" data-item="2">
-            <div class="submenu-content">
-              <span>Grafika 3D</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="inne" data-item="3">
-            <div class="submenu-content">
-              <span>DIY projekty</span>
-            </div>
-          </div>
-          <div class="submenu-item" data-section="inne" data-item="4">
-            <div class="submenu-content">
-              <span>Podróże</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Detail View (po kliknięciu w kafelek) -->
-      <div class="content-view" id="view-detail">
-        <div class="split-container">
-          <div class="content-picture">
-            <div class="picture-carousel">
-              <img src="photos/main-site/main-2.jpg" alt="Detail" />
-            </div>
-
-            <div class="detail-nav">
-              <button
-                class="nav-btn nav-btn--prev"
-                id="btn-prev"
-                aria-label="Poprzedni"
-                title="Poprzedni (←)"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                class="nav-btn nav-btn--back"
-                id="btn-back"
-                aria-label="Wróć do menu"
-                title="Wróć do menu (ESC)"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                class="nav-btn nav-btn--next"
-                id="btn-next"
-                aria-label="Następny"
-                title="Następny (→)"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="content-text">
-            <!-- Breadcrumb Navigation -->
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-              <span class="breadcrumb-item" id="breadcrumb-section"
-                >Akwarystyka</span
-              >
-              <span class="breadcrumb-separator">→</span>
-              <span
-                class="breadcrumb-item breadcrumb-current"
-                id="breadcrumb-item"
-                >Pozycja 1</span
-              >
-            </nav>
-
-            <h2 id="detail-title">Detail Title</h2>
-            <div id="detail-content">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Navigation Buttons (dolny środek) -->
       </div>
 
       <!-- Kontakt View -->
@@ -297,6 +191,16 @@
       </div>
     </main>
 
-    <script src="script-v3.js"></script>
+    <!-- jQuery (required for Slick) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Slick Slider JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+    <!-- Custom JS -->
+    <script src="script-blur.js"></script>
   </body>
 </html>
